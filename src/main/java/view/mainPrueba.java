@@ -47,7 +47,10 @@ public class mainPrueba {
                         .build());
 
             Repository<Employee> repository = new EmployeeRepository();
+            System.out.println("**** List of employees from the database ****");
+            repository.list().stream().forEach(System.out::println);
             Scanner s = new Scanner(System.in);
+            System.out.println("**** Create an employee ****");
             System.out.println("Escriba el nombre");
             String nombre = s.nextLine();
             System.out.println("Escriba el apellido");
@@ -62,6 +65,25 @@ public class mainPrueba {
                     .last_name(apellido)
                     .rol(rol.get(id_rol))
                     .birthday_date((birthVerify))
+                    .build());
+            System.out.println("**** Update an existing employee ****");
+            System.out.println("Actualizar el nombre");
+            String nombreUpdate = s.nextLine();
+            System.out.println("Actualizar el apellido");
+            String apellidoUpdate = s.nextLine();
+            System.out.println("Actualizar el rol");
+            int id_rolUpdate = s.nextInt();
+            System.out.println("Actualice fecha de cumple");
+            String birthday_dateUpdate = s.next();
+            LocalDate birthVerifyUpdate = LocalDate.parse(birthday_dateUpdate,dateTimeFormatter);
+            System.out.println("Indique el id");
+            int id = s.nextInt();
+            repository.update(Employee.builder()
+                    .first_name(nombreUpdate)
+                    .last_name(apellidoUpdate)
+                    .rol(rol.get(id_rolUpdate))
+                    .birthday_date((birthVerifyUpdate))
+                    .id(id)
                     .build());
         }
     }
